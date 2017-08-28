@@ -17,6 +17,12 @@ endif()
 # install
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${Qcv_BINARY_DIR}/bin/Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${Qcv_BINARY_DIR}/bin/Release)
+set(CMAKE_INSTALL_PREFIX ${PROJECT_BINARY_DIR}/install)
+set(INSTALL_DIR ${PROJECT_BINARY_DIR}/install)
+
+# cmake
+include(cmake/msvs.cmake) # visual studio
+add_definitions("/wd4819 /wd4251 /wd4996")
 
 # OpenMP
 find_package(OpenMP REQUIRED)
@@ -44,3 +50,5 @@ find_package(Qt5Concurrent REQUIRED)
 set(QT_LIBS Qt5::Widgets Qt5::Sql Qt5::Core Qt5::Concurrent)
 
 add_subdirectory(app)
+add_subdirectory(core)
+add_subdirectory(lib)
