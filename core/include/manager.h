@@ -24,6 +24,7 @@ private:
   static Manager* instance_;
   QList<Feature*> features_;
 };
+  void Qcv_API SetStyleSheet(QWidget* widget, QString file);
 }//!namespace qcv;
 
 #endif // !__CORE_MANAGER_H__

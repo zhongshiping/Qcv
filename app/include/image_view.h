@@ -2,23 +2,28 @@
 #define __APP_IMAGE_VIEW_H__
 
 #include <QWidget>
+#include <QScrollArea>
 
-class ImageView : public QWidget
+class ImageView : public QScrollArea
 {
   Q_OBJECT
 public:
-  explicit ImageView();
+  explicit ImageView(QWidget* parent = nullptr);
   ~ImageView();
 
-  void SetImage(QImage image);
-  void SetScale(qreal scale);
-protected:
-  void paintEvent(QPaintEvent* e) override;
+public slots:
+  void SetBackgroundImage(const QImage& image);
+  void ZoomIn();
+  void ZoomOut();
+  void Fit();
+
+signals:
+  void ScaleChanged(qreal scale);
 
 private:
-
   QImage image_;
-  qreal scale_;
+  class Impl;
+  Impl* impl_;
 };
 
 #endif //!__APP_IMAGE_VIEW_H__

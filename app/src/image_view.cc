@@ -1,28 +1,36 @@
 #include "image_view.h"
-#include <QPainter>
+#include "image_view_impl.h"
 
-ImageView::ImageView()
-  : scale_(1)
+ImageView::ImageView(QWidget* parent)
+  : QScrollArea(parent)
+  , impl_(new Impl(this))
 {
+  setAlignment(Qt::AlignCenter);
+  setWidget(impl_);
+  connect(impl_, &Impl::ScaleChanged, this, &ImageView::ScaleChanged);
+  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 ImageView::~ImageView()
 {
 }
 
-void ImageView::SetImage(QImage image)
+void ImageView::SetBackgroundImage(const QImage& image)
 {
-  image_ = image;
+  impl_->SetBackgroundImage(image);
 }
 
-void ImageView::SetScale(qreal scale)
+void ImageView::ZoomIn()
 {
-  scale_ = scale;
+  impl_->ZoomIn();
 }
 
-void ImageView::paintEvent(QPaintEvent* e)
+void ImageView::ZoomOut()
 {
-  QPainter p(this);
-  p.scale(scale_, scale_);
-  p.drawImage(0, 0, image_);
+  impl_->ZoomOut();
+}
+
+void ImageView::Fit()
+{
+  impl_->Fit(width(), height());
 }

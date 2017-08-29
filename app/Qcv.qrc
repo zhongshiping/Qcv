@@ -1,5 +1,15 @@
 <RCC>
     <qresource prefix = "/">
-        <file>rc/Qcv.png</file>
+        <file>rc/capture.png</file>
+		<file>rc/copy.png</file>
+		<file>rc/edit.png</file>
+		<file>rc/fit.png</file>
+		<file>rc/open-file.png</file>
+		<file>rc/original.png</file>
+		<file>rc/undo.png</file>
+		<file>rc/view.png</file>
+		<file>rc/zoom_in.png</file>
+		<file>rc/zoom_out.png</file>
+		<file>rc/main_window.qss</file>
     </qresource>
 </RCC>

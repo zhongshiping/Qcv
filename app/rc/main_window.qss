@@ -1,0 +1,10 @@
+QAction
+{
+	icon-size : 64px;
+}
+
+ImageView
+{
+	min-width : 1024px;
+	min-height : 860px;
+}

@@ -7,7 +7,6 @@
 
 namespace qcv
 {
-
   class Qcv_API Object : public QObject
   {
     Q_OBJECT

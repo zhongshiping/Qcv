@@ -14,12 +14,18 @@ public:
   ~MainWindow();
 
   void SetToolWidget(QWidget* widget);
+public slots:
+  void OpenFile();
+  void OpenDevice();
 private:
   void SetupUi();
+  void SetImage(const QImage& image);
   ImageView* image_view_;
   QMenuBar* menu_bar_;
   QToolBar* tool_bar_;
   QWidget* tool_widget_;
+
+  QString image_path_;
 };
 
 #endif //!__APP_MAIN_WINDOW_H__

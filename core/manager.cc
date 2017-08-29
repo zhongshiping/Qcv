@@ -3,6 +3,8 @@
 #include <QDir>
 #include <QPluginLoader>
 #include <QCoreApplication>
+#include <QWidget>
+#include <QTextStream>
 
 namespace qcv
 {
@@ -71,5 +73,17 @@ Manager::Manager()
 
 Manager::~Manager()
 {
+}
+
+void SetStyleSheet(QWidget* widget, QString file_path)
+{
+  QFile file;
+  file.setFileName(file_path);
+  if(!file.open(QIODevice::ReadOnly))
+  {
+    return;
+  }
+  QTextStream text_stream(&file);
+  widget->setStyleSheet(text_stream.readAll());
 }
 }
