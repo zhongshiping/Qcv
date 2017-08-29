@@ -28,10 +28,35 @@ void Manager::Destory()
   }
 }
 
-bool Manager::LoadPlugins()
+bool Manager::LoadImageSource()
+{
+  QDir plugin_dir = QCoreApplication::applicationDirPath();
+  if(!plugin_dir.cd("./plugins/capture/picture"))
+  {
+    return false;
+  }
+  QStringList filter("*.dll");
+  QStringList files = plugin_dir.entryList(filter);
+  foreach(const QString& file_name, files)
+  {
+    QPluginLoader loader(plugin_dir.absoluteFilePath(file_name));
+    ImageSource* image_source = qobject_cast<ImageSource*>(loader.instance());
+    if(image_source != nullptr)
+    {
+      image_source_ = image_source;
+    }
+  }
+  if(image_source_ == nullptr)
+  {
+    return false;
+  }
+  return true;
+}
+
+bool Manager::LoadFeaturePlugins()
 {
   QDir plugin_path = QCoreApplication::applicationDirPath();
-  plugin_path.cd("./plugins/");
+  plugin_path.cd("./plugins/feature");
   QFileInfoList file_info_list = plugin_path.entryInfoList();
   foreach(const QFileInfo& file_info, file_info_list)
   { 
@@ -67,7 +92,7 @@ bool Manager::LoadPlugins()
   return true;
 }
 
-Manager::Manager()
+Manager::Manager(): image_source_(nullptr)
 {
 }
 

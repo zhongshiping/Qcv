@@ -11,5 +11,6 @@
 		<file>rc/zoom_in.png</file>
 		<file>rc/zoom_out.png</file>
 		<file>rc/main_window.qss</file>
+		<file>rc/save.png</file>
     </qresource>
 </RCC>

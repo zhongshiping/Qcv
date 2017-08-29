@@ -2,6 +2,7 @@
 #define __APP_MAIN_WINDOW_H__
 
 #include <QMainWindow>
+#include "image_source.h"
 class ImageView;
 class QMenuBar;
 class QToolBar;
@@ -14,18 +15,17 @@ public:
   ~MainWindow();
 
   void SetToolWidget(QWidget* widget);
-public slots:
-  void OpenFile();
-  void OpenDevice();
 private:
   void SetupUi();
-  void SetImage(const QImage& image);
+
   ImageView* image_view_;
   QMenuBar* menu_bar_;
   QToolBar* tool_bar_;
   QWidget* tool_widget_;
 
   QString image_path_;
+  QImage image_;
+  qcv::ImageSource* image_source_;
 };
 
 #endif //!__APP_MAIN_WINDOW_H__
