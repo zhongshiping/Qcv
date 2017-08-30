@@ -10,13 +10,14 @@ class ImageView : public QScrollArea
 public:
   explicit ImageView(QWidget* parent = nullptr);
   ~ImageView();
-  QImage Image() const { return image_; };
 public slots:
   void SetBackgroundImage(const QImage& image);
   void ZoomIn();
   void ZoomOut();
   void Fit();
+  void Original();
 
+  void Save();
 signals:
   void ScaleChanged(qreal scale);
 

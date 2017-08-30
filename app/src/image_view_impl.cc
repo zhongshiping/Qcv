@@ -2,6 +2,8 @@
 #include <QPainter>
 #include <QtMath>
 #include <QWheelEvent>
+#include <QDateTime>
+#include <QCoreApplication>
 
 qreal ImageView::Impl::kZoomInRatio = 1.25;
 
@@ -95,6 +97,20 @@ void ImageView::Impl::Fit(int w, int h)
   if (ScaleInRange(scale))
   {
     UpdateScale(scale);
+  }
+}
+
+void ImageView::Impl::Original()
+{
+  UpdateScale(1.0);
+}
+
+void ImageView::Impl::Save()
+{
+  if (!background_pixmap_.isNull())
+  {
+    QString file_name = QCoreApplication::applicationDirPath() + "/" + QDateTime::currentDateTime().toString("yyMMddhhmmss") + ".png";
+    background_pixmap_.save(file_name);
   }
 }
 

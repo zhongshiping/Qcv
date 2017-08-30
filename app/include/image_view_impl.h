@@ -14,6 +14,9 @@ public:
   void ZoomIn();
   void ZoomOut();
   void Fit(int w, int h);
+  void Original();
+
+  void Save();
 signals:
   void ScaleChanged(qreal scale);
 

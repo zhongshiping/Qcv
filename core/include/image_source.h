@@ -2,15 +2,15 @@
 #define  __CORE_IMAGE_SOURCE_H__
 
 #include "def.h"
-#include <QObject>
-#include <QImage>
+#include "object.h"
+#include <opencv2/opencv.hpp>
 
 namespace qcv
 {
 
 struct ImageBuffer;
 
-class Qcv_API ImageSource : public QObject
+class Qcv_API ImageSource : public Object
 {
   Q_OBJECT
 public:
@@ -20,20 +20,12 @@ public:
   virtual void Close() = 0;
   virtual bool Start() = 0;
   virtual void Stop() = 0;
-  virtual ImageBuffer* Capture() = 0;
-  virtual ImageBuffer* DisCapture() = 0;
+  virtual cv::Mat Capture() = 0;
+  virtual cv::Mat DisCapture() = 0;
 signals:
-  void ChangedEvent(void*, QImage::Format f);
+  void ChangedEvent(cv::Mat&);
 };
 
-struct ImageBuffer
-{
-  unsigned char* buffer;
-  int width;
-  int height;
-  int bytes_perline;
-  bool used;
-};
 }// !namespace ImageSource
 Q_DECLARE_INTERFACE(qcv::ImageSource, "com.qcv.image_source")
 

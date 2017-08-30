@@ -1,9 +1,9 @@
 #include "picture.h"
 #include <QFileDialog>
+#include <opencv2/opencv.hpp>
 
 Picture::Picture()
-  : image_buffer_(new qcv::ImageBuffer)
-  , need_image_(true)
+  : need_image_(true)
 {
   connect(&timer_, &QTimer::timeout, this, &Picture::TimeHandle);
 }
@@ -35,15 +35,15 @@ void Picture::Stop()
   need_image_ = false;
 }
 
-qcv::ImageBuffer* Picture::Capture()
+cv::Mat Picture::Capture()
 {
   Grab();
-  return image_buffer_;
+  return image_;
 }
 
-qcv::ImageBuffer* Picture::DisCapture()
+cv::Mat Picture::DisCapture()
 {
-  return image_buffer_;
+  return image_;
 }
 
 void Picture::Grab()
@@ -53,20 +53,16 @@ void Picture::Grab()
   {
     return;
   }
-  image_.load(file_name);
-  if (image_.isNull())
+  using namespace cv;
+  Mat image = imread(file_name.toStdString(), IMREAD_UNCHANGED);
+
+  if (image.empty())
   {
     return;
   }
-  image_buffer_->buffer = new unsigned char[image_.width() * image_.height()];
-  image_buffer_->height = image_.height();
-  image_buffer_->width = image_.width();
-  image_buffer_->bytes_perline = image_.width();
+  image_ = image;
 
-  image_buffer_->buffer = image_.bits();
-  QImage::Format f = image_.format();
-
-  emit ChangedEvent(image_buffer_, f);
+  emit ChangedEvent(image_);
   need_image_ = false;
 }
 
@@ -75,6 +71,6 @@ void Picture::TimeHandle()
   if (need_image_)
   {
     Grab();
-    emit ChangedEvent(image_buffer_, image_.format());
+    emit ChangedEvent(image_);
   }
 }

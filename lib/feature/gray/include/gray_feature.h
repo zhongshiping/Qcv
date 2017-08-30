@@ -3,6 +3,8 @@
 
 #include "feature.h"
 
+class QAction;
+
 class GrayFeatur : public qcv::Feature
 {
   Q_OBJECT
@@ -14,7 +16,7 @@ public:
 
   QString Name() const override;
   QWidget* ToolWidget() const override;
-  void Process(unsigned char* image, const QSize& size) override;
+  void Process(cv::Mat& buffer) override;
   QIcon Icon() const override;
 };
 

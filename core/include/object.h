@@ -1,9 +1,9 @@
 #ifndef __CORE_OBJECT_H__
 #define __CORE_OBJECT_H__
 
-#include <QObject>
 #include <QVariantHash>
 #include "def.h"
+#include <Qimage>
 
 namespace qcv
 {

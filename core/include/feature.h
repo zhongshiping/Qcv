@@ -2,7 +2,9 @@
 #define __CORE_FEATURE_H__
 
 #include "object.h"
+#include <opencv2/opencv.hpp>
 
+class QAction;
 namespace qcv
 {
   class QToolBar;
@@ -16,7 +18,7 @@ namespace qcv
     virtual QString Name() const = 0;
     virtual QWidget* ToolWidget() const = 0;
     virtual QIcon Icon() const = 0;
-    virtual void Process(unsigned char* image, const QSize &size) = 0;
+    virtual void Process(cv::Mat&) = 0;
   };
 } // !namespace qcv
 

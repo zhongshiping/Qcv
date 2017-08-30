@@ -18,16 +18,15 @@ public:
   bool Start() override;
   void Stop() override;
 
-  qcv::ImageBuffer* Capture() override;
-  qcv::ImageBuffer* DisCapture() override;
+  cv::Mat Capture() override;
+  cv::Mat DisCapture() override;
 
 private:
   void Grab();
   void TimeHandle();
-  qcv::ImageBuffer* image_buffer_;
   QTimer timer_;
   bool need_image_;
-  QImage image_;
+  cv::Mat image_;
 };
 
 #endif //__PICTURE_H__

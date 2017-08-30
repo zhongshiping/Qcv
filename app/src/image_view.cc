@@ -34,3 +34,13 @@ void ImageView::Fit()
 {
   impl_->Fit(width(), height());
 }
+
+void ImageView::Original()
+{
+  impl_->Original();
+}
+
+void ImageView::Save()
+{
+  impl_->Save();
+}

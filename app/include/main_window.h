@@ -15,6 +15,8 @@ public:
   ~MainWindow();
 
   void SetToolWidget(QWidget* widget);
+public slots:
+  void SetBackgroundImage(cv::Mat& mat);
 private:
   void SetupUi();
 
@@ -24,8 +26,8 @@ private:
   QWidget* tool_widget_;
 
   QString image_path_;
-  QImage image_;
   qcv::ImageSource* image_source_;
+  cv::Mat mat_;
 };
 
 #endif //!__APP_MAIN_WINDOW_H__
